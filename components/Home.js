@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
@@ -59,21 +60,89 @@ const Home = (props) => {
       />
       <Text style={styles.title}>Explorar</Text>
       <View style={styles.exploreContainer}>
-        <TouchableOpacity style={styles.exploreItem}>
-          <ImageBackground
-            style={styles.exploreImg}
-            source={require('../img/animacao.jpg')}>
-            <Text style={styles.exploreTxt}>Animação</Text>
-          </ImageBackground>
+        <TouchableOpacity>
+          <View style={styles.exploreItem}>
+            <ImageBackground
+              imageStyle={{borderRadius: 6}}
+              style={styles.exploreImg}
+              source={require('../img/animacao.jpg')}>
+              <LinearGradient
+                colors={[
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0.3)',
+                  'rgba(0, 0, 0, 0.6)',
+                  'rgba(0, 0, 0, 0.8)',
+                ]}
+                style={styles.linearGradient}>
+                <Text style={styles.exploreTxt}>Animação</Text>
+              </LinearGradient>
+            </ImageBackground>
+          </View>
         </TouchableOpacity>
 
-        <View style={styles.exploreItem}>
-          <ImageBackground
-            style={styles.exploreImg}
-            source={require('../img/animacao.jpg')}>
-            <Text>Animação</Text>
-          </ImageBackground>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.exploreItem}>
+            <ImageBackground
+              imageStyle={{borderRadius: 6}}
+              style={styles.exploreImg}
+              source={require('../img/aventura.jpg')}>
+              <LinearGradient
+                colors={[
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0.3)',
+                  'rgba(0, 0, 0, 0.6)',
+                  'rgba(0, 0, 0, 0.8)',
+                ]}
+                style={styles.linearGradient}>
+                <Text style={styles.exploreTxt}>Aventura</Text>
+              </LinearGradient>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.exploreItem}>
+            <ImageBackground
+              imageStyle={{borderRadius: 6}}
+              style={styles.exploreImg}
+              source={require('../img/documentario.png')}>
+              <LinearGradient
+                colors={[
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0.3)',
+                  'rgba(0, 0, 0, 0.6)',
+                  'rgba(0, 0, 0, 0.8)',
+                ]}
+                style={styles.linearGradient}>
+                <Text style={styles.exploreTxt}>Documentário</Text>
+              </LinearGradient>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.exploreItem}>
+            <ImageBackground
+              imageStyle={{borderRadius: 6}}
+              style={styles.exploreImg}
+              source={require('../img/terror.jpg')}>
+              <LinearGradient
+                colors={[
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0)',
+                  'rgba(0, 0, 0, 0.3)',
+                  'rgba(0, 0, 0, 0.6)',
+                  'rgba(0, 0, 0, 0.8)',
+                ]}
+                style={styles.linearGradient}>
+                <Text style={styles.exploreTxt}>Terror</Text>
+              </LinearGradient>
+            </ImageBackground>
+          </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -128,12 +197,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    marginBottom: 50,
   },
   exploreImg: {
     width: 150,
     height: 120,
-    justifyContent: 'flex-end',
-    paddingBottom: 10,
   },
   exploreItem: {
     width: 150,
@@ -144,6 +212,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Poppins-Bold',
     textAlign: 'center',
+  },
+  linearGradient: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: 120,
+    width: 150,
+    borderRadius: 6,
+    paddingBottom: 10,
   },
 });
 

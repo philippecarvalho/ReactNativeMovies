@@ -45,6 +45,10 @@ const Home = (props) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require('../img/react-movies-logo.png')}
+      />
       <Text style={styles.title}>Principais essa semana</Text>
       <FlatList
         showsHorizontalScrollIndicator={false}
@@ -96,8 +100,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
+    alignSelf: 'center',
+    marginBottom: 30,
   },
   title: {
     fontSize: 24,

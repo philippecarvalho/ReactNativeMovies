@@ -8,39 +8,38 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Explorar from './Explorar';
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
 
-  let similarMoviesURL;
-
-  if (props.movieID) {
-    similarMoviesURL = `https://api.themoviedb.org/3/movie/${props.movieID}/similar?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR&page=1`;
-  }
   const trendingMoviesURL =
     'https://api.themoviedb.org/3/trending/movie/week?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR';
 
-  const fetchMovies = async () => {
-    if (props.movieID) {
-      const response = await fetch(similarMoviesURL);
-      const data = await response.json();
-      setMovies(data.results);
-    } else {
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchMovies = async () => {
       const response = await fetch(trendingMoviesURL);
       const data = await response.json();
-      setMovies(data.results);
-    }
-  };
+      if (isMounted) {
+        setMovies(data.results);
+      }
+    };
 
-  useEffect(() => {
     fetchMovies();
-  }, [props.movieID]);
+
+    return () => {
+      isMounted = false;
+    };
+  });
 
   const renderItem = ({item}) => (
     <>
-      <Item item={item} />
+      <Item item={item} navigation={props.navigation} />
     </>
   );
 
@@ -58,109 +57,26 @@ const Home = (props) => {
         keyExtractor={({id}, index) => id.toString()}
         renderItem={renderItem}
       />
-      <Text style={styles.title}>Explorar</Text>
-      <View style={styles.exploreContainer}>
-        <TouchableOpacity>
-          <View style={styles.exploreItem}>
-            <ImageBackground
-              imageStyle={{borderRadius: 6}}
-              style={styles.exploreImg}
-              source={require('../img/animacao.jpg')}>
-              <LinearGradient
-                colors={[
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0.3)',
-                  'rgba(0, 0, 0, 0.6)',
-                  'rgba(0, 0, 0, 0.8)',
-                ]}
-                style={styles.linearGradient}>
-                <Text style={styles.exploreTxt}>Animação</Text>
-              </LinearGradient>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View style={styles.exploreItem}>
-            <ImageBackground
-              imageStyle={{borderRadius: 6}}
-              style={styles.exploreImg}
-              source={require('../img/aventura.jpg')}>
-              <LinearGradient
-                colors={[
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0.3)',
-                  'rgba(0, 0, 0, 0.6)',
-                  'rgba(0, 0, 0, 0.8)',
-                ]}
-                style={styles.linearGradient}>
-                <Text style={styles.exploreTxt}>Aventura</Text>
-              </LinearGradient>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View style={styles.exploreItem}>
-            <ImageBackground
-              imageStyle={{borderRadius: 6}}
-              style={styles.exploreImg}
-              source={require('../img/documentario.png')}>
-              <LinearGradient
-                colors={[
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0.3)',
-                  'rgba(0, 0, 0, 0.6)',
-                  'rgba(0, 0, 0, 0.8)',
-                ]}
-                style={styles.linearGradient}>
-                <Text style={styles.exploreTxt}>Documentário</Text>
-              </LinearGradient>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View style={styles.exploreItem}>
-            <ImageBackground
-              imageStyle={{borderRadius: 6}}
-              style={styles.exploreImg}
-              source={require('../img/terror.jpg')}>
-              <LinearGradient
-                colors={[
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0)',
-                  'rgba(0, 0, 0, 0.3)',
-                  'rgba(0, 0, 0, 0.6)',
-                  'rgba(0, 0, 0, 0.8)',
-                ]}
-                style={styles.linearGradient}>
-                <Text style={styles.exploreTxt}>Terror</Text>
-              </LinearGradient>
-            </ImageBackground>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <Explorar navigation={props.navigation} />
     </ScrollView>
   );
 };
 
-const Item = ({item}) => {
+const Item = ({item, navigation}) => {
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 
   return (
-    <TouchableOpacity style={styles.posterContainer}>
-      <Image
-        style={styles.posterImg}
-        source={{
-          uri: `${imgBaseURL}${item.poster_path}`,
-        }}
-      />
-      <Text style={styles.movieTitle}>{item.title}</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={() => navigation.push('Single', {item})}>
+      <View style={styles.posterContainer}>
+        <Image
+          style={styles.posterImg}
+          source={{
+            uri: `${imgBaseURL}${item.poster_path}`,
+          }}
+        />
+        <Text style={styles.movieTitle}>{item.title}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

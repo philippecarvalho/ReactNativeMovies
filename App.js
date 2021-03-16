@@ -24,8 +24,7 @@ function MyStack() {
 const App = () => {
   return (
     <NavigationContainer>
-      <MyStack />
-      {/* <Tab.Navigator
+      <Tab.Navigator
         tabBarOptions={{
           activeTintColor: '#4d5ce7',
           labelStyle: {
@@ -35,7 +34,7 @@ const App = () => {
         }}>
         <Tab.Screen name="Home" component={MyStack} />
         <Tab.Screen name="Explorar" component={Explorar} />
-      </Tab.Navigator> */}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

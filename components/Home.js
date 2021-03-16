@@ -9,12 +9,14 @@ import {
   TouchableOpacity,
   ImageBackground,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Explorar from './Explorar';
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const trendingMoviesURL =
     'https://api.themoviedb.org/3/trending/movie/week?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR';
@@ -27,6 +29,7 @@ const Home = (props) => {
       const data = await response.json();
       if (isMounted) {
         setMovies(data.results);
+        setLoading(false);
       }
     };
 
@@ -50,13 +53,18 @@ const Home = (props) => {
         source={require('../img/react-movies-logo.png')}
       />
       <Text style={styles.title}>Principais essa semana</Text>
+
+      {loading && <ActivityIndicator size="large" color="#1e68d8" />}
+
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
         data={movies}
         keyExtractor={({id}, index) => id.toString()}
         renderItem={renderItem}
+        initialNumToRender={1}
       />
+
       <Explorar navigation={props.navigation} />
     </ScrollView>
   );
@@ -83,6 +91,7 @@ const Item = ({item, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: 'white',
   },
   logo: {
     alignSelf: 'center',
@@ -100,7 +109,7 @@ const styles = StyleSheet.create({
   },
   posterContainer: {
     width: 159,
-    marginRight: 30,
+    marginRight: 20,
     marginBottom: 10,
   },
   posterImg: {

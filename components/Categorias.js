@@ -2,19 +2,17 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  FlatList,
-  ScrollView,
-  Image,
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+
 import LinearGradient from 'react-native-linear-gradient';
 
-const Explorar = (props) => {
+const Categorias = (props) => {
   return (
-    <View>
-      <Text style={styles.title}>Explorar</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Categorias</Text>
       <View style={styles.exploreContainer}>
         <TouchableOpacity>
           <View style={styles.exploreItem}>
@@ -105,9 +103,6 @@ const Explorar = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
   logo: {
     alignSelf: 'center',
     marginBottom: 30,
@@ -124,7 +119,7 @@ const styles = StyleSheet.create({
   },
   posterContainer: {
     width: 159,
-    marginRight: 30,
+    marginRight: 20,
     marginBottom: 10,
   },
   posterImg: {
@@ -163,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Explorar;
+export default Categorias;

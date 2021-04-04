@@ -16,7 +16,7 @@ const Single = (props) => {
 
   const movieID = item.id;
 
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState('');
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -41,6 +41,11 @@ const Single = (props) => {
   });
 
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
+
+  let releaseYear = '';
+  if (movie !== '') {
+    releaseYear = movie.release_date.slice(0, 4);
+  }
 
   return (
     <ScrollView>
@@ -69,7 +74,7 @@ const Single = (props) => {
                 <Text style={styles.movieTitle}>{item.title}</Text>
 
                 <Text style={styles.movieTime}>
-                  {movie.release_date} / {movie.runtime} min
+                  {releaseYear} / {movie.runtime} min
                 </Text>
               </View>
 

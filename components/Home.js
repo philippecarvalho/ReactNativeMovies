@@ -6,13 +6,11 @@ import {
   ScrollView,
   Image,
   StyleSheet,
-  TouchableOpacity,
-  ImageBackground,
   TouchableWithoutFeedback,
   ActivityIndicator,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import Explorar from './Explorar';
+
+import Categorias from './Categorias';
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
@@ -40,10 +38,21 @@ const Home = (props) => {
     };
   });
 
+  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
+
   const renderItem = ({item}) => (
-    <>
-      <Item item={item} navigation={props.navigation} />
-    </>
+    <TouchableWithoutFeedback
+      onPress={() => props.navigation.push('Single', {item})}>
+      <View style={styles.posterContainer}>
+        <Image
+          style={styles.posterImg}
+          source={{
+            uri: `${imgBaseURL}${item.poster_path}`,
+          }}
+        />
+        <Text style={styles.movieTitle}>{item.title}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 
   return (
@@ -65,26 +74,8 @@ const Home = (props) => {
         initialNumToRender={1}
       />
 
-      <Explorar navigation={props.navigation} />
+      <Categorias />
     </ScrollView>
-  );
-};
-
-const Item = ({item, navigation}) => {
-  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
-
-  return (
-    <TouchableWithoutFeedback onPress={() => navigation.push('Single', {item})}>
-      <View style={styles.posterContainer}>
-        <Image
-          style={styles.posterImg}
-          source={{
-            uri: `${imgBaseURL}${item.poster_path}`,
-          }}
-        />
-        <Text style={styles.movieTitle}>{item.title}</Text>
-      </View>
-    </TouchableWithoutFeedback>
   );
 };
 

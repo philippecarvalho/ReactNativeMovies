@@ -8,6 +8,8 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
+import Categorias from './Categorias';
+
 import {Searchbar} from 'react-native-paper';
 
 const Pesquisar = (props) => {

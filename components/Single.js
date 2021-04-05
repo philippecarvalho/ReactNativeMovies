@@ -19,6 +19,8 @@ const Single = (props) => {
   const [movie, setMovie] = useState('');
   const [genres, setGenres] = useState([]);
 
+  const [providers, setProviders] = useState([]);
+
   useEffect(() => {
     let isMounted = true;
 
@@ -33,6 +35,15 @@ const Single = (props) => {
       }
     };
 
+    const fetchProvider = async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=450bf04edaaa49ba73752463a5e7270d`,
+      );
+      const data = await response.json();
+      setProviders(data.results);
+    };
+
+    fetchProvider();
     fetchMovie();
 
     return () => {
@@ -52,12 +63,10 @@ const Single = (props) => {
       <View style={styles.movieTop}>
         <ImageBackground
           style={styles.poster}
-          source={{
-            uri: `${imgBaseURL}${item.backdrop_path}`,
-          }}>
+          source={{uri: `${imgBaseURL}${item.backdrop_path}`}}>
           <TouchableWithoutFeedback
             style={styles.goBack}
-            onPress={() => props.navigation.push('Home')}>
+            onPress={() => props.navigation.goBack()}>
             <Image source={require('../img/arrow.png')} />
           </TouchableWithoutFeedback>
           <LinearGradient
@@ -104,17 +113,56 @@ const Single = (props) => {
 
         <View>
           <Text style={styles.title}>Streaming</Text>
-          <Image
-            style={styles.streamingImage}
-            source={require('../img/disney.jpg')}
-          />
+          <ProvidersList providers={providers} />
         </View>
       </View>
     </ScrollView>
   );
 };
 
+const ProvidersList = ({providers}) => {
+  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
+
+  if (providers.BR) {
+    if (providers.BR.flatrate) {
+      return (
+        <View style={styles.providersContainer}>
+          {providers.BR.flatrate.map((item) => (
+            <View style={styles.providersItem}>
+              <Image
+                style={styles.providersImg}
+                source={{
+                  uri: `${imgBaseURL}${item.logo_path}`,
+                }}
+              />
+              <Text style={styles.providersTitle}>{item.provider_name}</Text>
+            </View>
+          ))}
+        </View>
+      );
+    }
+  }
+
+  return <Text>Não encontrado</Text>;
+};
+
 const styles = StyleSheet.create({
+  providersContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  providersItem: {
+    marginRight: 30,
+  },
+  providersTitle: {
+    fontFamily: 'Poppins-Medium',
+  },
+  providersImg: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
   movieTop: {
     height: 270,
   },

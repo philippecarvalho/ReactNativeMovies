@@ -40,7 +40,9 @@ const Single = (props) => {
         `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=450bf04edaaa49ba73752463a5e7270d`,
       );
       const data = await response.json();
-      setProviders(data.results);
+      if (isMounted) {
+        setProviders(data.results);
+      }
     };
 
     fetchProvider();
@@ -128,7 +130,7 @@ const ProvidersList = ({providers}) => {
       return (
         <View style={styles.providersContainer}>
           {providers.BR.flatrate.map((item) => (
-            <View style={styles.providersItem}>
+            <View key={item.provider_id} style={styles.providersItem}>
               <Image
                 style={styles.providersImg}
                 source={{

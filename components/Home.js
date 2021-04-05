@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import Categorias from './Categorias';
+import Genres from './Genres';
 
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
@@ -74,7 +74,7 @@ const Home = (props) => {
         initialNumToRender={1}
       />
 
-      <Categorias />
+      <Genres />
     </ScrollView>
   );
 };

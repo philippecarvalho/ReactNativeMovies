@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import Single from './components/Single';
-import Pesquisar from './components/Pesquisar';
+import Search from './components/Search';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -26,7 +26,7 @@ function PesquisarTab() {
     <Stack.Navigator
       initialRouteName="Pesquisar"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Pesquisar" component={Pesquisar} />
+      <Stack.Screen name="Pesquisar" component={Search} />
       <Stack.Screen name="Single" component={Single} />
     </Stack.Navigator>
   );

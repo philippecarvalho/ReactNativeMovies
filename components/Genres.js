@@ -9,7 +9,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 
-const Categorias = (props) => {
+const Genres = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Categorias</Text>
@@ -158,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Categorias;
+export default Genres;

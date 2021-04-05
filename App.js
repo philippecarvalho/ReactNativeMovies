@@ -1,8 +1,11 @@
 import React from 'react';
+import {View} from 'react-native';
 import Home from './components/Home';
 import Single from './components/Single';
 import Search from './components/Search';
 import GenreResult from './components/GenreResult';
+
+import GeneralStatusBarColor from './components/GeneralStatusBarColor';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -37,6 +40,10 @@ function PesquisarTab() {
 const App = () => {
   return (
     <NavigationContainer>
+      <GeneralStatusBarColor
+        backgroundColor="#1e68d8"
+        barStyle="light-content"
+      />
       <Tab.Navigator
         tabBarOptions={{
           activeTintColor: '#4d5ce7',

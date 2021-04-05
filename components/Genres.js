@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,11 +10,19 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 const Genres = (props) => {
+  useEffect(() => {});
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Categorias</Text>
       <View style={styles.exploreContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Genre Result', {
+              genreID: 16,
+              genreTitle: 'Animação',
+            })
+          }>
           <View style={styles.exploreItem}>
             <ImageBackground
               imageStyle={{borderRadius: 6}}
@@ -35,7 +43,13 @@ const Genres = (props) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Genre Result', {
+              genreID: 12,
+              genreTitle: 'Aventura',
+            })
+          }>
           <View style={styles.exploreItem}>
             <ImageBackground
               imageStyle={{borderRadius: 6}}
@@ -56,7 +70,13 @@ const Genres = (props) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Genre Result', {
+              genreID: 99,
+              genreTitle: 'Documentário',
+            })
+          }>
           <View style={styles.exploreItem}>
             <ImageBackground
               imageStyle={{borderRadius: 6}}
@@ -77,7 +97,13 @@ const Genres = (props) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('Genre Result', {
+              genreID: 27,
+              genreTitle: 'Terror',
+            })
+          }>
           <View style={styles.exploreItem}>
             <ImageBackground
               imageStyle={{borderRadius: 6}}

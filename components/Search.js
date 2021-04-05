@@ -11,6 +11,7 @@ const Search = (props) => {
   const onChangeSearch = (query) => setSearchQuery(query);
 
   useEffect(() => {
+    console.log(props);
     let isMounted = true;
     const searchMoviesURL = `https://api.themoviedb.org/3/search/movie?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR&query=${searchQuery}&page=1&include_adult=false`;
 
@@ -38,7 +39,7 @@ const Search = (props) => {
         style={styles.searchBar}
       />
 
-      <SearchResult movies={movies} />
+      <SearchResult movies={movies} navigation={props.navigation} />
 
       <Genres />
     </View>

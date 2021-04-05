@@ -74,7 +74,7 @@ const Home = (props) => {
         initialNumToRender={1}
       />
 
-      <Genres />
+      <Genres navigation={props.navigation} />
     </ScrollView>
   );
 };

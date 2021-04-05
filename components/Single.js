@@ -89,7 +89,11 @@ const Single = (props) => {
                 </Text>
               </View>
 
-              <View>
+              <View style={styles.ratingContainer}>
+                <Image
+                  style={styles.singleRatingStar}
+                  source={require('../img/star.png')}
+                />
                 <Text style={styles.movieRanking}>{item.vote_average}</Text>
               </View>
             </View>
@@ -145,7 +149,7 @@ const ProvidersList = ({providers}) => {
     }
   }
 
-  return <Text>Não encontrado</Text>;
+  return <Text>Nenhum serviço disponível para este título</Text>;
 };
 
 const styles = StyleSheet.create({
@@ -241,6 +245,16 @@ const styles = StyleSheet.create({
   },
   streamingImage: {
     borderRadius: 5,
+  },
+  singleRatingStar: {
+    width: 23,
+    height: 23,
+    marginTop: 5,
+    marginRight: 10,
+  },
+  ratingContainer: {
+    display: 'flex',
+    flexDirection: 'row',
   },
 });
 

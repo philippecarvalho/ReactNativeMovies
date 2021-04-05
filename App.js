@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './components/Home';
 import Single from './components/Single';
 import Search from './components/Search';
+import GenreResult from './components/GenreResult';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -17,6 +18,7 @@ function HomeTab() {
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Single" component={Single} />
+      <Stack.Screen name="Genre Result" component={GenreResult} />
     </Stack.Navigator>
   );
 }

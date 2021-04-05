@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,11 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const SearchResult = ({props, movies}) => {
+const SearchResult = ({props, movies, navigation}) => {
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 
   const renderItem = ({item}) => (
-    <TouchableWithoutFeedback
-      onPress={() => props.navigation.push('Single', {item})}>
+    <TouchableWithoutFeedback onPress={() => navigation.push('Single', {item})}>
       <View style={styles.searchResultContainer}>
         <Image
           style={styles.resultImg}
@@ -23,8 +22,16 @@ const SearchResult = ({props, movies}) => {
         />
         <View>
           <Text style={styles.resultTitle}>{item.title}</Text>
-          <Text style={styles.resultRelease}>{item.release_date}</Text>
-          <Text style={styles.resultRanking}>{item.vote_average}</Text>
+          <Text style={styles.resultRelease}>
+            {item.release_date.slice(0, 4)}
+          </Text>
+          <View style={styles.ratingContainer}>
+            <Image
+              style={styles.resultRating}
+              source={require('../img/star.png')}
+            />
+            <Text style={styles.resultRanking}>{item.vote_average}</Text>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   resultTitle: {
+    fontFamily: 'Poppins-Bold',
     fontSize: 18,
     width: 220,
   },
@@ -63,6 +71,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
     fontSize: 16,
     color: '#565656',
+  },
+  ratingContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  resultRating: {
+    width: 19,
+    height: 19,
+    marginTop: 5,
+    marginRight: 10,
   },
   resultRanking: {
     fontFamily: 'Poppins-Medium',

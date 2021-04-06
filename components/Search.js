@@ -40,7 +40,7 @@ const Search = (props) => {
 
       <SearchResult movies={movies} navigation={props.navigation} />
 
-      <Genres />
+      <Genres navigation={props.navigation} />
     </View>
   );
 };
@@ -48,6 +48,7 @@ const Search = (props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    height: '100%',
     backgroundColor: '#fff',
   },
   searchBar: {

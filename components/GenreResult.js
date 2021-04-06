@@ -31,7 +31,7 @@ const GenreResult = (props) => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [props]);
 
   return (
     <View style={styles.container}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import Home from './components/Home';
 import Single from './components/Single';
 import Search from './components/Search';
@@ -45,8 +45,37 @@ const App = () => {
         barStyle="light-content"
       />
       <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color, size}) => {
+            if (route.name === 'Home') {
+              return (
+                <Image
+                  style={styles.singleRatingStar}
+                  source={
+                    focused
+                      ? require('./img/Home.png')
+                      : require('./img/Home-inactive.png')
+                  }
+                />
+              );
+            } else if (route.name === 'Pesquisar') {
+              return (
+                <Image
+                  style={styles.singleRatingStar}
+                  source={
+                    focused
+                      ? require('./img/Search.png')
+                      : require('./img/Search-inactive.png')
+                  }
+                />
+              );
+            }
+          },
+        })}
         tabBarOptions={{
           activeTintColor: '#4d5ce7',
+          showLabel: false,
+          style: {height: 70, elevation: 10, borderTopWidth: 1},
           labelStyle: {
             fontSize: 16,
             padding: 15,
@@ -58,5 +87,14 @@ const App = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  singleRatingStar: {
+    width: 28,
+    height: 28,
+    marginTop: 5,
+    marginRight: 10,
+  },
+});
 
 export default App;

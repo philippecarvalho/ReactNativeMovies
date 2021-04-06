@@ -6,7 +6,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
-  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -20,6 +20,7 @@ const Single = (props) => {
   const [genres, setGenres] = useState([]);
 
   const [providers, setProviders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -42,6 +43,7 @@ const Single = (props) => {
       const data = await response.json();
       if (isMounted) {
         setProviders(data.results);
+        setLoading(false);
       }
     };
 
@@ -119,15 +121,19 @@ const Single = (props) => {
 
         <View>
           <Text style={styles.title}>Streaming</Text>
-          <ProvidersList providers={providers} />
+          <ProvidersList providers={providers} loading={loading} />
         </View>
       </View>
     </ScrollView>
   );
 };
 
-const ProvidersList = ({providers}) => {
+const ProvidersList = ({providers, loading}) => {
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#1e68d8" />;
+  }
 
   if (providers.BR) {
     if (providers.BR.flatrate) {
@@ -153,22 +159,6 @@ const ProvidersList = ({providers}) => {
 };
 
 const styles = StyleSheet.create({
-  providersContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  providersItem: {
-    marginRight: 30,
-  },
-  providersTitle: {
-    fontFamily: 'Poppins-Medium',
-  },
-  providersImg: {
-    width: 80,
-    height: 80,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
   movieTop: {
     height: 270,
   },
@@ -255,6 +245,22 @@ const styles = StyleSheet.create({
   ratingContainer: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  providersContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  providersItem: {
+    marginRight: 30,
+  },
+  providersTitle: {
+    fontFamily: 'Poppins-Medium',
+  },
+  providersImg: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+    marginBottom: 10,
   },
 });
 

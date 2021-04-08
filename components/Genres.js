@@ -6,7 +6,7 @@ const Genres = (props) => {
   useEffect(() => {});
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>Categorias</Text>
       <View style={styles.exploreContainer}>
         <GenreItem
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   exploreContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginBottom: 50,
   },
 });

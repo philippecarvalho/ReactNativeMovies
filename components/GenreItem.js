@@ -50,12 +50,12 @@ const GenreItem = (props) => {
 
 const styles = StyleSheet.create({
   exploreItem: {
-    width: 177,
+    width: 160,
     height: 120,
     marginBottom: 10,
   },
   exploreImg: {
-    width: 177,
+    width: 160,
     height: 120,
   },
   exploreTxt: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     height: 120,
-    width: 177,
+    width: 160,
     borderRadius: 6,
     paddingBottom: 10,
   },

@@ -21,12 +21,12 @@ const GenreResult = (props) => {
     const fetchMovies = async () => {
       const response = await fetch(searchMovieByGenreURL);
       const data = await response.json();
-      if (isMounted) {
-        setMovies(data.results);
-      }
+      setMovies(data.results);
     };
 
-    fetchMovies();
+    if (isMounted) {
+      fetchMovies();
+    }
 
     return () => {
       isMounted = false;

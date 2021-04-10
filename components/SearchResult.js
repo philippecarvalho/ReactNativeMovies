@@ -23,7 +23,7 @@ const SearchResult = ({props, movies, navigation}) => {
         <View>
           <Text style={styles.resultTitle}>{item.title}</Text>
           <Text style={styles.resultRelease}>
-            {item.release_date.slice(0, 4)}
+            {item.release_date?.slice(0, 4)}
           </Text>
           <View style={styles.ratingContainer}>
             <Image

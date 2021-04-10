@@ -22,45 +22,38 @@ const Single = (props) => {
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const movieURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR`;
+
+  const movieProvidersURL = `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=450bf04edaaa49ba73752463a5e7270d`;
+
   useEffect(() => {
     let isMounted = true;
 
     const fetchMovie = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieID}?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR`,
-      );
+      const response = await fetch(movieURL);
       const data = await response.json();
-      if (isMounted) {
-        setMovie(data);
-        setGenres(data.genres);
-      }
+      setMovie(data);
+      setGenres(data.genres);
     };
 
     const fetchProvider = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=450bf04edaaa49ba73752463a5e7270d`,
-      );
+      const response = await fetch(movieProvidersURL);
       const data = await response.json();
-      if (isMounted) {
-        setProviders(data.results);
-        setLoading(false);
-      }
+      setProviders(data.results);
+      setLoading(false);
     };
 
-    fetchProvider();
-    fetchMovie();
+    if (isMounted) {
+      fetchProvider();
+      fetchMovie();
+    }
 
     return () => {
       isMounted = false;
     };
-  });
+  }, [movieURL, movieProvidersURL]);
 
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
-
-  let releaseYear = '';
-  if (movie !== '') {
-    releaseYear = movie.release_date.slice(0, 4);
-  }
 
   return (
     <ScrollView>
@@ -87,7 +80,7 @@ const Single = (props) => {
                 <Text style={styles.movieTitle}>{item.title}</Text>
 
                 <Text style={styles.movieTime}>
-                  {releaseYear} / {movie.runtime} min
+                  {movie.release_date?.slice(0, 4)} / {movie.runtime} min
                 </Text>
               </View>
 

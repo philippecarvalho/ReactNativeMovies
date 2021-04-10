@@ -25,18 +25,18 @@ const Home = (props) => {
     const fetchMovies = async () => {
       const response = await fetch(trendingMoviesURL);
       const data = await response.json();
-      if (isMounted) {
-        setMovies(data.results);
-        setLoading(false);
-      }
+      setMovies(data.results);
+      setLoading(false);
     };
 
-    fetchMovies();
+    if (isMounted) {
+      fetchMovies();
+    }
 
     return () => {
       isMounted = false;
     };
-  });
+  }, []);
 
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 

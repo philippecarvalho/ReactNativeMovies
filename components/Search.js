@@ -17,13 +17,12 @@ const Search = (props) => {
     const fetchMovies = async () => {
       const response = await fetch(searchMoviesURL);
       const data = await response.json();
-      if (isMounted) {
-        setMovies(data.results);
-      }
+      setMovies(data.results);
     };
 
-    fetchMovies();
-
+    if (isMounted) {
+      fetchMovies();
+    }
     return () => {
       isMounted = false;
     };

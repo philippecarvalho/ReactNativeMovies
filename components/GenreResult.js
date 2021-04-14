@@ -6,32 +6,25 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native';
+import {searchMoviesByGenre} from '../utils/search';
 import SearchResult from './SearchResult';
 
 const GenreResult = (props) => {
   const [movies, setMovies] = useState('');
+  const genreID = props.route.params.genreID;
 
   useEffect(() => {
     let isMounted = true;
 
-    const genreID = props.route.params.genreID;
-
-    const searchMovieByGenreURL = `https://api.themoviedb.org/3/discover/movie?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-br&sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}`;
-
-    const fetchMovies = async () => {
-      const response = await fetch(searchMovieByGenreURL);
-      const data = await response.json();
-      setMovies(data.results);
-    };
-
     if (isMounted) {
-      fetchMovies();
+      searchMoviesByGenre(genreID).then((response) =>
+        setMovies(response.data.results),
+      );
     }
-
     return () => {
       isMounted = false;
     };
-  }, [props]);
+  }, [genreID]);
 
   return (
     <View style={styles.container}>

@@ -12,25 +12,20 @@ import {
 
 import Genres from './Genres';
 
+import {searchTrendingMovies} from '../utils/search';
+
 const Home = (props) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const trendingMoviesURL =
-    'https://api.themoviedb.org/3/trending/movie/week?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR';
-
   useEffect(() => {
     let isMounted = true;
 
-    const fetchMovies = async () => {
-      const response = await fetch(trendingMoviesURL);
-      const data = await response.json();
-      setMovies(data.results);
-      setLoading(false);
-    };
-
     if (isMounted) {
-      fetchMovies();
+      searchTrendingMovies().then((response) => {
+        setMovies(response.data.results);
+        setLoading(false);
+      });
     }
 
     return () => {

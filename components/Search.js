@@ -4,24 +4,22 @@ import Genres from './Genres';
 import SearchResult from './SearchResult';
 import {Searchbar} from 'react-native-paper';
 
+import {searchMultipleMovies} from '../utils/search';
+
 const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState('');
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   useEffect(() => {
     let isMounted = true;
-    const searchMoviesURL = `https://api.themoviedb.org/3/search/movie?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR&query=${searchQuery}&page=1&include_adult=false`;
-
-    const fetchMovies = async () => {
-      const response = await fetch(searchMoviesURL);
-      const data = await response.json();
-      setMovies(data.results);
-    };
-
-    if (isMounted) {
-      fetchMovies();
+    if (isMounted && searchQuery) {
+      searchMultipleMovies(searchQuery).then((response) =>
+        setMovies(response.data.results),
+      );
     }
     return () => {
       isMounted = false;

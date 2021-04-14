@@ -11,6 +11,8 @@ import {
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
+import {searchSingleMovie, searchProviders} from '../utils/search';
+
 const Single = (props) => {
   const {item} = props.route.params;
 
@@ -18,40 +20,27 @@ const Single = (props) => {
 
   const [movie, setMovie] = useState('');
   const [genres, setGenres] = useState([]);
-
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const movieURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=450bf04edaaa49ba73752463a5e7270d&language=pt-BR`;
-
-  const movieProvidersURL = `https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=450bf04edaaa49ba73752463a5e7270d`;
-
   useEffect(() => {
     let isMounted = true;
-
-    const fetchMovie = async () => {
-      const response = await fetch(movieURL);
-      const data = await response.json();
-      setMovie(data);
-      setGenres(data.genres);
-    };
-
-    const fetchProvider = async () => {
-      const response = await fetch(movieProvidersURL);
-      const data = await response.json();
-      setProviders(data.results);
-      setLoading(false);
-    };
-
     if (isMounted) {
-      fetchProvider();
-      fetchMovie();
+      searchSingleMovie(movieID).then((response) => {
+        setMovie(response.data);
+        setGenres(response.data.genres);
+      });
+
+      searchProviders(movieID).then((response) => {
+        setProviders(response.data.results);
+        setLoading(false);
+      });
     }
 
     return () => {
       isMounted = false;
     };
-  }, [movieURL, movieProvidersURL]);
+  }, [movieID]);
 
   const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 

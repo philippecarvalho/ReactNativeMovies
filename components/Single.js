@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {imgBaseURL} from '../utils/imgBaseURL';
 import {searchSingleMovie, searchProviders} from '../utils/search';
 
 const Single = (props) => {
@@ -41,8 +41,6 @@ const Single = (props) => {
       isMounted = false;
     };
   }, [movieID]);
-
-  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 
   return (
     <ScrollView>

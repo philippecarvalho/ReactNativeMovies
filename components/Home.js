@@ -12,6 +12,8 @@ import {
 
 import Genres from './Genres';
 
+import {imgBaseURL} from '../utils/imgBaseURL';
+
 import {searchTrendingMovies} from '../utils/search';
 
 const Home = (props) => {
@@ -32,8 +34,6 @@ const Home = (props) => {
       isMounted = false;
     };
   }, []);
-
-  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
 
   const renderItem = ({item}) => (
     <TouchableWithoutFeedback

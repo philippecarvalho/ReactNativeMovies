@@ -8,9 +8,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const SearchResult = ({props, movies, navigation}) => {
-  const imgBaseURL = 'https://image.tmdb.org/t/p/original/';
+import {imgBaseURL} from '../utils/imgBaseURL';
 
+const SearchResult = ({props, movies, navigation}) => {
   const renderItem = ({item}) => (
     <TouchableWithoutFeedback onPress={() => navigation.push('Single', {item})}>
       <View style={styles.searchResultContainer}>

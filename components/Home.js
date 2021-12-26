@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ActivityIndicator,
+  SafeAreaView,
 } from 'react-native';
 
 import Genres from './Genres';
@@ -51,26 +52,28 @@ const Home = (props) => {
   );
 
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('../img/react-movies-logo.png')}
-      />
-      <Text style={styles.title}>Principais essa semana</Text>
+    <SafeAreaView>
+      <ScrollView style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../img/react-movies-logo.png')}
+        />
+        <Text style={styles.title}>Principais essa semana</Text>
 
-      {loading && <ActivityIndicator size="large" color="#1e68d8" />}
+        {loading && <ActivityIndicator size="large" color="#1e68d8" />}
 
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        data={movies}
-        keyExtractor={({id}, index) => id.toString()}
-        renderItem={renderItem}
-        initialNumToRender={1}
-      />
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={movies}
+          keyExtractor={({id}, index) => id.toString()}
+          renderItem={renderItem}
+          initialNumToRender={1}
+        />
 
-      <Genres navigation={props.navigation} />
-    </ScrollView>
+        <Genres navigation={props.navigation} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

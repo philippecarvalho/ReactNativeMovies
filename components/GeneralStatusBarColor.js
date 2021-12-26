@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, StatusBar} from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 import styles from './styles/GeneralStatusBarColorStyles';
 const GeneralStatusBarColor = ({backgroundColor, ...props}) => (
-  <View style={[styles.statusBar, {backgroundColor}]}>
+  <SafeAreaView style={[styles.statusBar, {backgroundColor}]}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-  </View>
+  </SafeAreaView>
 );
 export default GeneralStatusBarColor;

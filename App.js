@@ -40,14 +40,11 @@ function PesquisarTab() {
 const App = () => {
   return (
     <NavigationContainer>
-      <GeneralStatusBarColor
-        backgroundColor="#1e68d8"
-        barStyle="light-content"
-      />
+      <GeneralStatusBarColor backgroundColor="#fff" barStyle="dark-content" />
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color, size}) => {
-            if (route.name === 'Home') {
+            if (route.name === 'HomeTab') {
               return (
                 <Image
                   style={styles.singleRatingStar}
@@ -81,7 +78,7 @@ const App = () => {
             padding: 15,
           },
         }}>
-        <Tab.Screen name="Home" component={HomeTab} />
+        <Tab.Screen name="HomeTab" component={HomeTab} />
         <Tab.Screen name="Pesquisar" component={PesquisarTab} />
       </Tab.Navigator>
     </NavigationContainer>

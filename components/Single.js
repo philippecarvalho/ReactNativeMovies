@@ -211,7 +211,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 20,
     lineHeight: 22,
-    fontFamily: 'Roboto',
   },
   streamingImage: {
     borderRadius: 5,
